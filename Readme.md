@@ -35,12 +35,50 @@ Este es un proyecto en desarrollo activo. Por ahora incluye:
 
 Para ejecutar este proyecto necesitas tener instalado:
 
+### Herramientas principales
+
 - **Python 3.11.8** → [Descargar aquí](https://www.python.org/downloads/)
 - **Git** → [Descargar aquí](https://git-scm.com/downloads)
-- Un editor de código (recomiendo VS Code o PyCharm)
-- Terminal/CMD/PowerShell
+- **Docker Desktop** → [Descargar aquí](https://www.docker.com/products/docker-desktop/)
 
-Compatible con Windows, Linux y macOS.
+### ¿Por qué Docker?
+
+Este proyecto usa Docker para ejecutar PostgreSQL, lo que garantiza:
+- ✅ Entorno reproducible en cualquier sistema operativo
+- ✅ No necesitas instalar PostgreSQL manualmente
+- ✅ Fácil setup con un solo comando
+
+Docker Desktop incluye:
+- Docker Engine (motor de contenedores)
+- Docker Compose (orquestación de servicios)
+
+**Nota para Windows:** Docker Desktop instalará y configurará WSL 2 automáticamente si no lo tienes.
+
+### Otras herramientas
+
+- Un editor de código (recomiendo VS Code o PyCharm)
+- Terminal/CMD/PowerShell/Git Bash
+
+Compatible con Windows 10/11, Linux y macOS.
+
+---
+
+### ✅ Verificar instalación
+
+Ejecuta estos comandos para confirmar que todo está instalado correctamente:
+```bash
+# Python
+python --version  # Debe mostrar: Python 3.11.8
+
+# Git
+git --version     # Ejemplo: git version 2.43.0
+
+# Docker
+docker --version  # Ejemplo: Docker version 24.0.7
+docker compose version  # Ejemplo: Docker Compose version v2.23.0
+```
+
+Si todos los comandos funcionan, puedes continuar con la instalación del proyecto.
 
 ---
 
@@ -109,14 +147,14 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 5. Configurar variables de entorno / Crear copia de la plantila env.example
+### 6. Configurar variables de entorno / Crear copia de la plantila env.example
 
 ```bash
 cp .env.example .env  
 ```
 
 
-### 6. ¡Ejecuta la aplicación!
+### 7. ¡Ejecuta la aplicación!
 
 ```bash
 uvicorn app.main:app --reload
@@ -160,6 +198,41 @@ Desde aquí puedes probar todos los endpoints directamente desde tu navegador. �
 👉 http://127.0.0.1:8000/redoc
 
 ---
+
+## 🐘 Levantar la Base de Datos
+
+Este proyecto usa PostgreSQL en Docker. Para iniciar la base de datos:
+```bash
+docker compose up -d
+```
+
+Este comando:
+- Descarga la imagen de PostgreSQL (solo la primera vez)
+- Crea el contenedor `postgres_fastapi_tareas`
+- Levanta PostgreSQL en segundo plano
+- Expone el puerto `5432` en `localhost`
+
+### Verificar que esté corriendo
+```bash
+docker compose ps
+```
+
+Debes ver el contenedor con estado `Up`.
+
+### Comandos útiles
+```bash
+# Ver logs
+docker compose logs -f
+
+# Detener PostgreSQL
+docker compose stop
+
+# Detener y eliminar contenedor (mantiene datos)
+docker compose down
+
+# Reiniciar
+docker compose restart
+```
 
 ## 🧠 Decisiones de Diseño
 

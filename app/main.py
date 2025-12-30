@@ -1,10 +1,9 @@
 from fastapi import FastAPI
 from app.core.config import settings
+from app.api.health import router as health_router
 
 app = FastAPI(
     title=settings.APP_NAME
 )
 
-@app.get("/salud")
-def verificar_estado():
-    return {"estado": "ok"}
+app.include_router(health_router)

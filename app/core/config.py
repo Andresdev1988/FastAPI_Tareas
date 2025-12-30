@@ -1,15 +1,14 @@
+from functools import lru_cache
 from pydantic_settings import BaseSettings
-
 class Settings(BaseSettings):
     # Aplicación
     APP_NAME: str = "Gestor de Tareas"
     APP_ENV: str = "local"
     DEBUG: bool = True
-
-    # Seguridad
-    SECRET_KEY: str
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
-
+    # Seguridad - JWT
+    JWT_SECRET_KEY: str
+    JWT_ALGORITHM: str = "HS256"
+    JWT_EXPIRE_MINUTES: int = 60
     # Base de datos
     DB_HOST: str
     DB_PORT: int
@@ -19,7 +18,11 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = ".env"
-        case_sensitive = True
+        case_sensitive = True  
 
+@lru_cache
+def get_settings() -> Settings:
+    return Settings()
 
-settings = Settings()
+# Variable global para uso directo
+settings = get_settings()
