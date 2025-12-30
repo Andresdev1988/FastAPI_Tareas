@@ -66,7 +66,7 @@ FastAPI_Tareas/
 
 ---
 
-## 🎬 Puesta en Marcha
+## 🎬 Puesta en Marcha de instalación
 
 ### 1. Clona el repositorio
 
@@ -106,10 +106,15 @@ python -m pip install --upgrade pip
 ### 5. Instala las dependencias
 
 ```bash
-pip install fastapi uvicorn
+pip install -r requirements.txt
 ```
 
-💡 **Tip:** Si existe un `requirements.txt`, puedes usar: `pip install -r requirements.txt`
+### 5. Configurar variables de entorno / Crear copia de la plantila env.example
+
+```bash
+cp .env.example .env  
+```
+
 
 ### 6. ¡Ejecuta la aplicación!
 

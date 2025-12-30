@@ -1,9 +1,8 @@
 from fastapi import FastAPI
+from app.core.config import settings
 
 app = FastAPI(
-    title="Prueba Técnica Backend - FastAPI",
-    description="API para gestión de tareas",
-    version="1.0.0"
+    title=settings.APP_NAME
 )
 
 @app.get("/salud")
